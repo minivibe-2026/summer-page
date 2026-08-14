@@ -550,6 +550,111 @@ img{max-width:100%}
   .detail-circle{ width:30px; height:30px; font-size:14px; }
 }
 
+/* MOBILE HERO — dedicated banner for max-width:720px.
+   The PC hero (#heroScaleOuter / .hero, 1240px) is untouched above this
+   breakpoint. Below it, the PC hero is hidden outright (not scaled down)
+   and this purpose-built .hero-mobile takes over instead. Beach/map are
+   simply not part of this markup, so they never appear on mobile. */
+.hero-mobile{ display:none; }
+@media (max-width:720px){
+  .hero-scale-outer{ display:none; }
+
+  .hero-mobile{
+    display:block;
+    padding:40px 20px 30px;
+    text-align:center;
+    background:#FFFFFF;
+    overflow:hidden;
+  }
+  .hm-eyebrow{
+    width:150px;
+    height:auto;
+    object-fit:contain;
+    display:block;
+    margin:0 auto 14px;
+  }
+  .hm-title{
+    margin:0 0 8px;
+    font-size:26px;
+    line-height:1.32;
+    font-weight:700;
+    letter-spacing:-.02em;
+    color:var(--c-ink);
+  }
+  .hm-sub{
+    margin:0 0 18px;
+    font-size:14px;
+    font-weight:500;
+    color:#666666;
+    line-height:1.55;
+  }
+  .hm-cta{
+    margin:0 auto 46px;
+  }
+  .hm-character-wrap{
+    position:relative;
+    width:100%;
+    max-width:380px;
+    height:170px;
+    margin:0 auto 26px;
+  }
+  .hm-capsule-character{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:84%;
+    height:108px;
+    border-radius:var(--radius-capsule);
+    background:linear-gradient(160deg, #EFFAF3 0%, #DCF1E4 100%);
+  }
+  .hm-character-img{
+    position:absolute;
+    bottom:-2px;
+    left:42%;
+    transform:translateX(-50%);
+    height:216px;
+    width:auto;
+    object-fit:contain;
+    z-index:2;
+  }
+  .hm-sun{
+    position:absolute;
+    top:0;
+    right:0;
+    width:38px;
+    height:auto;
+    object-fit:contain;
+    z-index:3;
+  }
+  .hm-keywords-row{
+    display:flex;
+    flex-wrap:nowrap;
+    justify-content:center;
+    gap:6px;
+    max-width:360px;
+    margin:0 auto;
+  }
+  .hm-keywords-row + .hm-keywords-row{
+    margin-top:8px;
+  }
+  .hm-keywords-row .pill{
+    height:32px;
+    padding:0 10px;
+    font-size:12px;
+  }
+}
+@media (max-width:360px){
+  .hero-mobile{ padding:34px 16px 26px; }
+  .hm-eyebrow{ margin-bottom:12px; }
+  .hm-title{ font-size:23px; }
+  .hm-cta{ margin-bottom:38px; }
+  .hm-character-wrap{ height:150px; }
+  .hm-capsule-character{ height:96px; }
+  .hm-character-img{ height:190px; }
+  .hm-sun{ width:32px; }
+  .hm-keywords-row .pill{ font-size:11px; padding:0 8px; }
+}
+
 </style>
 
 <style>
@@ -644,6 +749,32 @@ img{max-width:100%}
   </div>
 </header>
 </div>
+
+<!-- MOBILE HERO — shown only at max-width:720px (PC hero above is hidden there via CSS) -->
+<header class="hero-mobile" id="heroMobile">
+  <img class="hm-eyebrow" src="assets/summer-curation.png" alt="Summer Curation">
+
+  <h1 class="hm-title">이번여름<br>어디로 떠나볼까?</h1>
+  <p class="hm-sub">계절에 꼭 어울리는 명소만 엄선했어요.</p>
+  <span class="pill pill-outline hm-cta">100x100 명소발굴</span>
+
+  <div class="hm-character-wrap">
+    <div class="hm-capsule-character"></div>
+    <img class="hm-character-img" src="assets/hero-character.png" alt="더워하는 여름 캐릭터">
+    <img class="hm-sun" src="assets/sun-icon.png" alt="" aria-hidden="true">
+  </div>
+
+  <div class="hm-keywords-row">
+    <span class="pill pill-dark">액티비티</span>
+    <span class="pill pill-light">파도위에서 놀아볼까?</span>
+    <span class="pill pill-light">초록초록 나무냄새</span>
+  </div>
+  <div class="hm-keywords-row">
+    <span class="pill pill-light">열대야 휴식</span>
+    <span class="pill pill-light">이번 여름 제대로 놀아보자!</span>
+    <span class="pill pill-dark">시원한 바람 최고!</span>
+  </div>
+</header>
 
 <nav class="tabs-wrap" aria-label="여름 명소 카테고리">
   <div class="tabs" id="tabs"></div>
@@ -780,6 +911,10 @@ render(initial);
   let rafId = null;
 
   function apply(){
+    /* MOBILE HERO: below 720px .hero-scale-outer is display:none and the
+       dedicated .hero-mobile banner takes over — skip the PC scale math
+       entirely so it never fights with or shrinks the mobile layout. */
+    if (getComputedStyle(outer).display === 'none') return;
     stage.style.transform = 'none';
     const naturalWidth = stage.offsetWidth;
     const naturalHeight = stage.offsetHeight;
