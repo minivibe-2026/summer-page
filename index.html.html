@@ -1,0 +1,1146 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>여름 명소 큐레이션</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" as="style" crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+:root{
+  /* Color */
+  --c-primary:#28C96F;
+  --c-primary-soft:#EAF8F0;
+  --c-ink:#111111;
+  --c-gray:#666666;
+  --c-line:#EEEEEE;
+  --c-bg:#FFFFFF;
+  --c-white:#FFFFFF;
+
+  /* Layout */
+  --radius-card:20px;
+  --radius-capsule:999px;
+  --radius-pill:999px;
+  --gap-card:20px;
+  --max-width:1240px;
+
+  /* Type */
+  --font-base: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; overflow-x:hidden;}
+body{
+  margin:0;
+  background:var(--c-bg);
+  color:var(--c-ink);
+  font-family:var(--font-base);
+  -webkit-font-smoothing:antialiased;
+  word-break:keep-all;
+  overflow-wrap:break-word;
+  overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit}
+button{font:inherit}
+img{max-width:100%}
+
+:is(a,button,.tab):focus-visible{
+  outline:2px solid var(--c-primary);
+  outline-offset:2px;
+  border-radius:8px;
+}
+
+/* =========================================================
+   HERO — 좌 / 중앙 / 우 3분할
+   ========================================================= */
+.hero-scale-outer{
+  width:100%;
+  display:flex;
+  justify-content:center;
+}
+.hero{
+  max-width:1240px;
+  width:1240px;
+  margin:0 auto;
+  padding:48px 30px 34px;
+  min-height:430px;
+  background:#FFFFFF;
+  flex:none;
+}
+
+.hero::after{
+  content:"";
+  display:block;
+  height:10px;
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:36fr 28fr 36fr;
+  gap:34px;
+  align-items:center;
+}
+.hero-col{ display:flex; flex-direction:column; }
+
+/* ---- 좌측: 캐릭터 캡슐 + pill 무리 ---- */
+.hero-left{ gap:14px; align-items:flex-start; }
+.capsule{
+  border-radius:var(--radius-capsule);
+  background:var(--c-primary);
+  position:relative;
+}
+.capsule-character{
+  width:100%;
+  max-width:400px;
+  height:205px;
+  position:relative;
+  overflow:visible;
+}
+.capsule-character .asset-img{
+  position:absolute;
+  bottom:-2px;
+  left:50%;
+  transform:translateX(-50%);
+  height:312px;
+  width:auto;
+  object-fit:contain;
+  z-index:2;
+}
+.hero-sun-deco{
+  position:absolute;
+  top:-13px;
+  right:8%;
+  width:clamp(46px,4.8vw,52px);
+  height:auto;
+  object-fit:contain;
+  z-index:3;
+  pointer-events:none;
+}
+
+.hero-keywords{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:7px 8px;
+  width:410px;
+  max-width:100%;
+  margin-top:8px;
+  align-content:flex-start;
+}
+.pill{
+  display:inline-flex;
+  align-items:center;
+  height:30px;
+  padding:0 12px;
+  border-radius:var(--radius-pill);
+  font-size:11.5px;
+  font-weight:600;
+  white-space:nowrap;
+}
+.pill-light{ background:var(--c-white); color:var(--c-ink); border:1px solid #E5E5E5; }
+.pill-dark{ background:var(--c-ink); color:var(--c-white); }
+
+/* ---- 중앙: 카피 ---- */
+.hero-center{
+  align-items:center;
+  text-align:center;
+  justify-content:center;
+  gap:10px;
+  padding:0 2px;
+  transform:translateY(-2px);
+}
+.hero-eyebrow{
+  font-size:14px;
+  font-weight:600;
+  color:var(--c-primary);
+  letter-spacing:.01em;
+}
+.hero-eyebrow-img{
+  width:clamp(160px,16vw,188px);
+  height:auto;
+  object-fit:contain;
+  display:block;
+  margin-bottom:6px;
+}
+.hero-title{
+  margin:6px 0 0;
+  font-size:clamp(26px,2.2vw,32px);
+  line-height:1.3;
+  font-weight:700;
+  letter-spacing:-.02em;
+  color:var(--c-ink);
+}
+.hero-sub{
+  margin:6px 0 10px;
+  font-size:14.5px;
+  font-weight:500;
+  color:#666666;
+  line-height:1.6;
+}
+.pill-outline{
+  display:inline-flex;
+  align-items:center;
+  height:44px;
+  background:var(--c-white);
+  color:var(--c-primary);
+  border:1.5px solid var(--c-primary);
+  font-weight:600;
+  font-size:15px;
+  padding:0 28px;
+}
+
+/* ---- 우측: 분리된 캡슐 2개 세로 배치 ---- */
+.hero-right{ gap:18px; align-items:flex-end; }
+.capsule-beach,
+.capsule-map{
+  width:100%;
+  max-width:342px;
+  height:160px;
+  position:relative;
+  margin-left:auto;
+  overflow:visible;
+}
+.capsule-beach .asset-img{
+  position:absolute;
+  left:50%;
+  bottom:-12px;
+  transform:translateX(-50%);
+  width:314px;
+  height:auto;
+  object-fit:contain;
+  z-index:2;
+}
+.capsule-map .asset-img{
+  position:absolute;
+  left:50%;
+  top:-16px;
+  transform:translateX(-50%);
+  width:328px;
+  height:auto;
+  object-fit:contain;
+  z-index:2;
+}
+
+/* =========================================================
+   카테고리 탭
+   ========================================================= */
+.tabs-wrap{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(255,255,255,.98);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid #F0F0F0;
+}
+.tabs{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:15px 28px;
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scrollbar-width:none;
+}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  white-space:nowrap;
+  display:inline-flex;
+  align-items:center;
+  height:44px;
+  border:1px solid #E8E8E8;
+  background:var(--c-white);
+  color:#333333;
+  border-radius:var(--radius-pill);
+  padding:0 20px;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  transition:background .2s ease, color .2s ease, border-color .2s ease;
+}
+.tab-icon{ margin-right:6px; }
+.tab.active{
+  background:var(--c-primary);
+  color:var(--c-white);
+  border-color:var(--c-primary);
+}
+@media (prefers-reduced-motion:reduce){ .tab{ transition:none } }
+
+/* =========================================================
+   본문 / 카드 그리드
+   ========================================================= */
+.content{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:32px 28px 80px;
+}
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+.section-head h2{
+  margin:0;
+  font-size:24px;
+  font-weight:700;
+  letter-spacing:-.03em;
+}
+.count{ color:var(--c-gray); font-size:14px; }
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:var(--gap-card);
+}
+@media (max-width:1199px) and (min-width:768px){
+  .grid{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+}
+@media (max-width:767px){
+  .grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+}
+
+.card{
+  display:flex;
+  flex-direction:column;
+  height:100%;
+  background:var(--c-white);
+  border:1px solid #ECECEC;
+  border-radius:var(--radius-card);
+  overflow:hidden;
+  box-shadow:0 5px 18px rgba(0,0,0,.05);
+}
+@media (hover:hover){
+  .card{ transition:box-shadow .2s ease; }
+  .card:hover{ box-shadow:0 10px 26px rgba(0,0,0,.09); }
+  .card:hover .photo img{ transform:scale(1.03); }
+}
+@media (prefers-reduced-motion:reduce){
+  .photo img{ transition:none !important; }
+}
+
+.photo{
+  position:relative;
+  aspect-ratio:4/3;
+  background:linear-gradient(135deg,var(--c-primary-soft),#DCEFE5);
+  overflow:hidden;
+}
+.photo img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .35s ease;
+}
+.photo img.img-hidden{ display:none; }
+.photo .fallback{
+  position:absolute; inset:0;
+  display:none;
+  align-items:center; justify-content:center;
+  color:var(--c-primary);
+  font-size:11.5px; font-weight:700;
+  text-align:center; padding:10px;
+}
+.photo.no-image .fallback{ display:flex; }
+
+.info{
+  position:relative;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  padding:16px 72px 18px 16px;
+}
+.title{
+  margin:0 0 6px;
+  font-size:17px;
+  font-weight:700;
+  letter-spacing:-.02em;
+  line-height:1.35;
+}
+.desc{
+  margin:0;
+  flex:1;
+  font-family:"Pretendard", var(--font-base);
+  font-size:13.5px;
+  font-weight:500;
+  color:#5A5A5A;
+  letter-spacing:-.003em;
+  line-height:1.55;
+  min-height:calc(1.55em * 2);
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  word-break:keep-all;
+  overflow-wrap:break-word;
+}
+.detail-link{
+  position:absolute;
+  right:14px;
+  bottom:14px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+}
+.detail-text{
+  font-size:10px;
+  font-weight:600;
+  color:#93A199;
+  white-space:nowrap;
+}
+.detail-circle{
+  width:38px; height:38px;
+  border-radius:50%;
+  background:var(--c-primary-soft);
+  color:var(--c-primary);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:17px;
+  font-weight:700;
+}
+.detail-link[aria-disabled="true"] .detail-text{ color:#C3C9C5; }
+.detail-link[aria-disabled="true"] .detail-circle{
+  background:var(--c-line);
+  color:#B6C0BA;
+  cursor:not-allowed;
+}
+@media (hover:hover){
+  .detail-circle{ transition:background .2s ease, color .2s ease; }
+  .card:hover .detail-circle{ background:var(--c-primary); color:var(--c-white); }
+}
+
+.empty{
+  display:none;
+  padding:80px 20px;
+  text-align:center;
+  color:var(--c-gray);
+  background:var(--c-white);
+  border:1px dashed var(--c-line);
+  border-radius:var(--radius-card);
+}
+
+.page-footer{
+  padding:36px 28px 60px;
+  text-align:center;
+  color:#A2ADA6;
+  font-size:11.5px;
+}
+
+
+/* Keyword sticker cluster: compact 3 + 3 rhythm like the approved visual
+   (always on — the hero is now a fixed composition that scales as a whole) */
+.hero-keywords .pill:nth-child(1){ order:1; }
+.hero-keywords .pill:nth-child(2){ order:2; }
+.hero-keywords .pill:nth-child(3){ order:3; }
+.hero-keywords .pill:nth-child(4){ order:4; margin-left:14px; }
+.hero-keywords .pill:nth-child(5){ order:5; }
+.hero-keywords .pill:nth-child(6){ order:6; }
+.hero-keywords::after{
+  content:"";
+  flex-basis:100%;
+  width:0;
+  order:3;
+}
+
+/* =========================================================
+   HERO responsive stability + visual hierarchy
+   ========================================================= */
+
+/* Decorative keyword stickers: visually distinct from functional category tabs */
+.hero-keywords{
+  gap:6px 7px;
+}
+.hero-keywords .pill{
+  height:27px;
+  padding:0 11px;
+  font-size:11px;
+  font-weight:600;
+  border-radius:10px;
+  box-shadow:none;
+}
+.hero-keywords .pill-light{
+  border:1px solid #E7E7E7;
+  background:#FFF;
+}
+.hero-keywords .pill-dark{
+  border:1px solid #111;
+}
+
+/* Functional category tabs: larger rounded controls, clearly separate from stickers */
+.tabs{
+  gap:12px;
+}
+.tab{
+  min-height:46px;
+  height:46px;
+  padding:0 22px;
+  border-radius:16px;
+  font-size:14px;
+  font-weight:650;
+  border:1px solid #E4E7E5;
+  box-shadow:0 2px 8px rgba(17,17,17,.025);
+}
+.tab.active{
+  box-shadow:0 5px 14px rgba(40,201,111,.16);
+}
+
+/* Keep transparent PNG artwork fully visible inside its allotted hero area */
+.capsule-character .asset-img{
+  height:286px;
+  bottom:-4px;
+}
+.capsule-beach .asset-img{
+  width:292px;
+  bottom:-9px;
+}
+.capsule-map .asset-img{
+  width:304px;
+  top:-9px;
+}
+
+/* Half-window / narrow desktop: preserve the 3-column composition instead of stacking */
+@media (max-width:1023px) and (min-width:721px){
+  .tabs{
+    padding:13px 20px;
+    gap:9px;
+  }
+  .tab{
+    height:42px;
+    min-height:42px;
+    padding:0 16px;
+    border-radius:15px;
+    font-size:12.5px;
+  }
+}
+
+/* True mobile only: intentional vertical composition */
+@media (max-width:720px){
+  .tabs{
+    padding:12px 10px;
+    gap:6px;
+    justify-content:center;
+    overflow-x:visible;
+  }
+  .tab{
+    flex:1 1 0;
+    min-width:0;
+    height:auto;
+    min-height:44px;
+    padding:7px 4px;
+    border-radius:var(--radius-pill);
+    font-size:clamp(13.5px, 3.7vw, 16px);
+    font-weight:600;
+    letter-spacing:-0.2px;
+    white-space:normal;
+    line-height:1.2;
+    text-align:center;
+    justify-content:center;
+  }
+  .tab-icon{ display:none; }
+  .tab-modifier{
+    display:none;
+  }
+  .tab-noun{
+    font-weight:700;
+  }
+  .content{ padding:24px 16px 60px; }
+  .section-head h2{ font-size:20px; }
+  .info{ padding:12px 12px 14px; }
+  .title{ font-size:14.5px; }
+  .desc{ font-size:11.5px; }
+  .detail-link{
+    position:static;
+    flex-direction:row;
+    align-items:center;
+    align-self:flex-end;
+    margin-top:8px;
+    gap:5px;
+  }
+  .detail-text{ font-size:9px; }
+  .detail-circle{ width:30px; height:30px; font-size:14px; }
+}
+
+/* MOBILE HERO — dedicated banner for max-width:720px.
+   The PC hero (#heroScaleOuter / .hero, 1240px) is untouched above this
+   breakpoint. Below it, the PC hero is hidden outright (not scaled down)
+   and this purpose-built .hero-mobile takes over instead. Beach/map are
+   simply not part of this markup, so they never appear on mobile. */
+.hero-mobile{ display:none; }
+@media (max-width:720px){
+  .hero-scale-outer{ display:none; }
+
+  .hero-mobile{
+    display:block;
+    padding:40px 20px 30px;
+    text-align:center;
+    background:#FFFFFF;
+    overflow:hidden;
+  }
+  .hm-eyebrow{
+    width:150px;
+    height:auto;
+    object-fit:contain;
+    display:block;
+    margin:0 auto 14px;
+  }
+  .hm-title{
+    margin:0 0 8px;
+    font-size:26px;
+    line-height:1.32;
+    font-weight:700;
+    letter-spacing:-.02em;
+    color:var(--c-ink);
+  }
+  .hm-sub{
+    margin:0 0 18px;
+    font-size:14px;
+    font-weight:500;
+    color:#666666;
+    line-height:1.55;
+  }
+  .hm-cta{
+    margin:0 auto 46px;
+  }
+  .hm-character-wrap{
+    position:relative;
+    width:100%;
+    max-width:380px;
+    height:170px;
+    margin:0 auto 4px;
+  }
+  .hm-capsule-character{
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:84%;
+    height:108px;
+    border-radius:var(--radius-capsule);
+    background:linear-gradient(160deg, #EFFAF3 0%, #DCF1E4 100%);
+  }
+  .hm-character-img{
+    position:absolute;
+    bottom:-2px;
+    left:50%;
+    transform:translateX(-50%);
+    height:216px;
+    width:auto;
+    object-fit:contain;
+    z-index:2;
+  }
+  .hm-sun{
+    position:absolute;
+    top:38px;
+    right:4%;
+    width:52px;
+    height:auto;
+    object-fit:contain;
+    z-index:3;
+  }
+}
+@media (max-width:360px){
+  .hero-mobile{ padding:34px 16px 26px; }
+  .hm-eyebrow{ margin-bottom:12px; }
+  .hm-title{ font-size:23px; }
+  .hm-cta{ margin-bottom:38px; }
+  .hm-character-wrap{ height:150px; }
+  .hm-capsule-character{ height:96px; }
+  .hm-character-img{ height:190px; }
+  .hm-sun{ width:40px; top:30px; }
+}
+
+</style>
+
+<style>
+/* v3 — fluid-window stability patch
+   Keep hero geometry predictable while browser width is freely resized. */
+.hero{
+  overflow: visible !important;
+}
+.hero-grid,
+.hero-col,
+.capsule,
+.capsule .asset-img{
+  min-width:0;
+}
+.capsule{
+  isolation:isolate;
+}
+
+/* Give transparent artwork a real safety zone above the green capsule.
+   The PNG itself may extend beyond the capsule, so never clip the hero. */
+.capsule-character,
+.capsule-beach,
+.capsule-map{
+  overflow:visible !important;
+}
+.capsule-beach .asset-img{
+  top:auto !important;
+  bottom:-6px !important;
+  width:min(86%,292px) !important;
+  max-height:calc(100% + 48px);
+}
+
+/* Cards should change column count only at deliberate breakpoints,
+   never distort their internal image/text geometry. */
+.grid{align-items:stretch;}
+.card{min-width:0;}
+.photo{width:100%;}
+.photo img{min-width:100%;}
+
+@media (min-width:1000px){
+  .grid{grid-template-columns:repeat(4,minmax(0,1fr));}
+}
+@media (min-width:680px) and (max-width:999px){
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+}
+@media (max-width:679px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+</style>
+
+\n
+
+<style id="mobile-liquid-glass-tabs">
+/* =========================================================
+   MOBILE ONLY — Liquid Glass v3
+   More glass material, less colored gradient.
+   Existing PC layout and tab behavior are untouched.
+   ========================================================= */
+@media (max-width:720px){
+
+  .tabs-wrap{
+    background:rgba(255,255,255,.94) !important;
+    -webkit-backdrop-filter:blur(18px) saturate(112%);
+    backdrop-filter:blur(18px) saturate(112%);
+  }
+
+  .tabs{
+    width:100% !important;
+    max-width:none !important;
+    box-sizing:border-box !important;
+    display:grid !important;
+    grid-template-columns:
+      minmax(58px,.72fr)
+      minmax(118px,1.42fr)
+      minmax(112px,1.32fr)
+      minmax(76px,.90fr) !important;
+    align-items:center !important;
+    gap:5px !important;
+    padding:13px 8px 16px !important;
+    overflow:hidden !important;
+  }
+
+  .tab-icon{display:none !important;}
+  .tab-modifier{display:inline !important;}
+  .tab-label{
+    display:block !important;
+    min-width:0 !important;
+    white-space:nowrap !important;
+    overflow:visible !important;
+    text-overflow:clip !important;
+  }
+
+  .tab,
+  .tab.active,
+  .tab:active{
+    position:relative !important;
+    isolation:isolate !important;
+    overflow:hidden !important;
+    width:100% !important;
+    min-width:0 !important;
+    height:44px !important;
+    min-height:44px !important;
+    padding:0 3px !important;
+    border-radius:999px !important;
+    transform:none !important;
+
+    font-family:"Pretendard",-apple-system,BlinkMacSystemFont,
+      "Apple SD Gothic Neo","Noto Sans KR",sans-serif !important;
+    font-size:clamp(9.6px,2.45vw,12.2px) !important;
+    font-weight:500 !important;
+    line-height:1 !important;
+    letter-spacing:-.045em !important;
+    text-align:center !important;
+    justify-content:center !important;
+    color:#292d2a !important;
+
+    -webkit-backdrop-filter:blur(20px) saturate(125%) brightness(1.035) !important;
+    backdrop-filter:blur(20px) saturate(125%) brightness(1.035) !important;
+
+    transition:
+      background .42s ease-out,
+      border-color .42s ease-out,
+      box-shadow .42s ease-out,
+      color .32s ease-out !important;
+  }
+
+  /* OFF: almost colorless translucent glass */
+  .tab{
+    background:
+      radial-gradient(circle at 18% 4%,
+        rgba(255,255,255,.96) 0 8%,
+        rgba(255,255,255,0) 28%),
+      linear-gradient(180deg,
+        rgba(255,255,255,.60) 0%,
+        rgba(255,255,255,.38) 52%,
+        rgba(246,249,247,.31) 100%) !important;
+
+    border:1px solid rgba(255,255,255,.86) !important;
+
+    box-shadow:
+      /* bright glass rim */
+      inset 0 1.2px 0 rgba(255,255,255,1),
+      inset 1px 0 0 rgba(255,255,255,.58),
+      inset -1px 0 0 rgba(172,187,178,.12),
+      /* glass thickness at bottom */
+      inset 0 -1.5px 0 rgba(151,169,158,.16),
+      inset 0 -5px 12px rgba(225,234,228,.10),
+      /* contact + ambient shadows */
+      0 2px 3px rgba(33,52,40,.045),
+      0 8px 17px rgba(33,52,40,.055) !important;
+  }
+
+  /* curved specular reflection */
+  .tab::before{
+    content:"" !important;
+    display:block !important;
+    position:absolute !important;
+    z-index:-1 !important;
+    pointer-events:none !important;
+
+    left:5% !important;
+    right:5% !important;
+    top:2px !important;
+    height:50% !important;
+    border-radius:999px 999px 55% 55% !important;
+
+    background:
+      linear-gradient(108deg,
+        rgba(255,255,255,.76) 0%,
+        rgba(255,255,255,.28) 30%,
+        rgba(255,255,255,.08) 55%,
+        rgba(255,255,255,.48) 100%) !important;
+
+    opacity:.80 !important;
+    filter:blur(.15px) !important;
+  }
+
+  /* subtle inner refraction along lower rim */
+  .tab::after{
+    content:"" !important;
+    display:block !important;
+    position:absolute !important;
+    z-index:-1 !important;
+    pointer-events:none !important;
+
+    left:7% !important;
+    right:7% !important;
+    bottom:2px !important;
+    height:29% !important;
+    border-radius:50% !important;
+
+    background:
+      radial-gradient(ellipse at 50% 100%,
+        rgba(255,255,255,.38) 0%,
+        rgba(255,255,255,.10) 47%,
+        rgba(255,255,255,0) 76%) !important;
+    opacity:.58 !important;
+  }
+
+  /* ON:
+     Keep the transparent glass body.
+     Color appears as light/refraction, not a solid fill. */
+  .tab.active{
+    color:#16472c !important;
+    border-color:rgba(235,255,243,.98) !important;
+
+    background:
+      /* tiny warm summer reflection */
+      radial-gradient(circle at 17% 9%,
+        rgba(255,226,94,.105) 0%,
+        rgba(255,226,94,.035) 19%,
+        rgba(255,255,255,0) 39%),
+      /* mint light source below the glass */
+      radial-gradient(ellipse 108% 84% at 50% 118%,
+        rgba(71,218,139,.23) 0%,
+        rgba(88,221,148,.14) 31%,
+        rgba(143,234,181,.065) 55%,
+        rgba(255,255,255,0) 76%),
+      /* nearly neutral glass body */
+      linear-gradient(180deg,
+        rgba(255,255,255,.67) 0%,
+        rgba(253,255,254,.45) 50%,
+        rgba(244,252,247,.37) 100%) !important;
+
+    box-shadow:
+      inset 0 1.4px 0 rgba(255,255,255,1),
+      inset 1px 0 0 rgba(255,255,255,.72),
+      inset -1px 0 0 rgba(111,199,150,.12),
+      inset 0 -1.5px 0 rgba(85,197,135,.20),
+      /* internal refracted mint light */
+      inset 0 -8px 17px rgba(80,218,142,.075),
+      /* short contact shadow */
+      0 2px 4px rgba(27,72,45,.045),
+      /* diffuse mint ambient light */
+      0 9px 21px rgba(62,202,125,.085),
+      0 13px 27px rgba(105,218,157,.045) !important;
+  }
+
+  .tab.active::before{
+    background:
+      linear-gradient(108deg,
+        rgba(255,255,255,.92) 0%,
+        rgba(255,255,255,.38) 30%,
+        rgba(235,255,244,.10) 57%,
+        rgba(255,255,255,.62) 100%) !important;
+    opacity:.94 !important;
+  }
+
+  .tab.active::after{
+    background:
+      radial-gradient(ellipse at 50% 100%,
+        rgba(133,239,179,.23) 0%,
+        rgba(207,249,225,.13) 42%,
+        rgba(255,255,255,0) 76%) !important;
+    opacity:.92 !important;
+  }
+
+  /* finger press: tiny depth response, no bounce */
+  .tab:active{
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,1),
+      inset 0 -6px 14px rgba(80,218,142,.07),
+      0 2px 5px rgba(30,72,46,.05) !important;
+  }
+}
+</style>
+
+\n
+</head>
+<body>
+
+<div class="hero-scale-outer" id="heroScaleOuter">
+<header class="hero" id="heroStage">
+  <div class="hero-grid">
+
+    <!-- 좌측: 캐릭터 캡슐 + 키워드 pill -->
+    <div class="hero-col hero-left">
+      <div class="capsule capsule-character">
+        <img class="asset-img" src="assets/hero-character.png" alt="더워하는 여름 캐릭터">
+        <img class="hero-sun-deco" src="assets/sun-icon.png" alt="" aria-hidden="true">
+      </div>
+      <div class="hero-keywords">
+        <span class="pill pill-dark">액티비티</span>
+        <span class="pill pill-light">파도위에서 놀아볼까?</span>
+        <span class="pill pill-light">초록초록 나무냄새</span>
+        <span class="pill pill-light">열대야 휴식</span>
+        <span class="pill pill-light">이번 여름 제대로 놀아보자!</span>
+        <span class="pill pill-dark">시원한 바람 최고!</span>
+      </div>
+    </div>
+
+    <!-- 중앙: 카피 -->
+    <div class="hero-col hero-center">
+      <img class="hero-eyebrow-img" src="assets/summer-curation.png" alt="Summer Curation">
+      <h1 class="hero-title">이번여름<br>어디로 떠나볼까?</h1>
+      <p class="hero-sub">계절에 꼭 맞는 4가지 주제와 명소 확인하기</p>
+      <span class="pill pill-outline">100x100 명소발굴</span>
+    </div>
+
+    <!-- 우측: 분리된 캡슐 2개 -->
+    <div class="hero-col hero-right">
+      <div class="capsule capsule-beach">
+        <img class="asset-img" src="assets/hero-beach.png" alt="야자수와 비치볼이 있는 여름 바다 일러스트">
+      </div>
+      <div class="capsule capsule-map">
+        <img class="asset-img" src="assets/hero-map.png" alt="접힌 여행지도와 위치 핀 일러스트">
+      </div>
+    </div>
+
+  </div>
+</header>
+</div>
+
+<!-- MOBILE HERO — shown only at max-width:720px (PC hero above is hidden there via CSS) -->
+<header class="hero-mobile" id="heroMobile">
+  <img class="hm-eyebrow" src="assets/summer-curation.png" alt="Summer Curation">
+
+  <h1 class="hm-title">이번여름<br>어디로 떠나볼까?</h1>
+  <p class="hm-sub">계절에 꼭 맞는 4가지 주제와 명소 확인하기</p>
+  <span class="pill pill-outline hm-cta">100x100 명소발굴</span>
+
+  <div class="hm-character-wrap">
+    <div class="hm-capsule-character"></div>
+    <img class="hm-character-img" src="assets/hero-character.png" alt="더워하는 여름 캐릭터">
+    <img class="hm-sun" src="assets/sun-icon.png" alt="" aria-hidden="true">
+  </div>
+</header>
+
+<nav class="tabs-wrap" aria-label="여름 명소 카테고리">
+  <div class="tabs" id="tabs"></div>
+</nav>
+
+<main class="content">
+  <div class="section-head">
+    <h2 id="sectionTitle"></h2>
+    <span class="count" id="count"></span>
+  </div>
+  <section class="grid" id="grid"></section>
+  <div class="empty" id="empty">명소 목록과 이미지를 넣으면 같은 카드 구조로 표시됩니다.</div>
+</main>
+
+<div class="page-footer">대한민국구석구석 · SUMMER</div>
+
+<script>
+/* EVENT_PAGE_URL은 유지하되, 이 페이지에서는 뒤로가기/이벤트 이동 버튼을 사용하지 않습니다. */
+const EVENT_PAGE_URL = "#";
+
+const categories = {
+  wave:   { label:"🌊 파도소리", places:[
+    { title:"해동용궁사",     image:"images/wave_01.jpg", description:"바다와 절이 어우러진 아름다운 풍경", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2116b628-ded9-42c2-b17e-99d17b5b65e4" },
+    { title:"거제 바람의 언덕", image:"images/wave_02.jpg", description:"풍차와 초원이 있는 남해 바람 명소", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=90c5cf0c-ff79-4b64-a3b9-afa02a465e46" },
+    { title:"해운대해수욕장",  image:"images/wave_03.jpg", description:"전국 1위 규모, 빌딩·호텔과 어우러진 도심 해변", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=36f54304-e9a8-4615-9226-eb749bf6ce75" },
+    { title:"광안리해수욕장",  image:"images/wave_04.jpg", description:"광안대교 야경이 빛나는 밤바다 명소", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=98763dd6-119d-4e32-910e-a40652334bda" },
+    { title:"협재해수욕장",    image:"images/wave_05.jpg", description:"코발트빛 바다와 울창한 소나무 숲이 어우러진 풍광", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=e00d3013-55ef-4c44-b944-571c50bc4b88" },
+    { title:"주전몽돌해변",    image:"images/wave_06.jpg", description:"까만 몽돌이 늘어선 해안과 청량한 파도 소리", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=9b1ce872-1dcc-4388-a7af-3ab908b177a4" },
+    { title:"함덕해수욕장",    image:"images/wave_07.jpg", description:"서우봉 오름이 품은 에메랄드빛 해변", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=53eddfdf-086c-410e-893c-20258343ac79" },
+    { title:"삼척 장호항",     image:"images/wave_08.jpg", description:"투명카누를 즐길 수 있는 한국의 나폴리", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=96d9779f-c89e-4ced-b9d9-4fbb7fc894be" },
+    { title:"태종대",         image:"images/wave_09.jpg", description:"깎아지른 절벽과 등대가 있는 부산 해안 절경", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=729fae7d-4312-40ad-9f5d-e470149e0026" },
+    { title:"강릉 안목해변",   image:"images/wave_10.jpg", description:"바다를 보며 커피를 즐기는 커피거리로 유명", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=f9d3fd78-55bd-4d5c-90fe-25af7ffa76a0" }
+  ]},
+  valley: { label:"💦 숲속의 에어컨, 계곡", places:[
+    { title:"구천동 계곡",       image:"images/img_01.jpg", description:"기암괴석과 수려한 폭포 이어지는 유서 깊은 계곡", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=113d7643-b5ca-41e6-b2e4-1921582a92f8" },
+    { title:"무릉계곡",         image:"images/img_02.jpg", description:"무릉반석과 쌍폭포 어우러진 동해안 최고의 무릉도원", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=886fe753-f7ef-4e7e-83d6-9f80c5650923" },
+    { title:"밀양 얼음골",       image:"images/img_03.png", description:"한여름에 얼음이 어는 신비한 계곡", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=ed95f0f5-4a6d-4c21-a4a6-1d238f63eb35" },
+    { title:"남원 뱀사골계곡",   image:"images/img_04.jpg", description:"14km나 이어지는 지리산 최고의 계곡 절경", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=7d954d8d-0d3c-42a9-9ec4-98dba898c755" },
+    { title:"산청 대원사 계곡",  image:"images/img_05.jpg", description:"맑은 물길과 생태탐방로의 지리산 대표 힐링 명소", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=031f17da-db64-4f35-b958-863852674f7b" },
+    { title:"대야산 용추계곡",   image:"images/img_06.jpg", description:"천연 바위 미끄럼틀로 인기 많은 물놀이 명소", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2ae26755-16dd-46e6-a455-ce3a0e0b5312" },
+    { title:"천지연폭포",       image:"images/img_07.jpg", description:"하늘과 땅이 만나 이룬 연못이라는 뜻의 명소", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=f4b66a09-b485-43c9-8162-c22993ad13c8" },
+    { title:"철구소",           image:"images/img_08.jpg", description:"이무기 전설 서린 깊고 맑은 배내골 소", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=03a272ab-c6c6-4a18-b714-b001f364474a" },
+    { title:"청송 얼음골",       image:"images/img_09.jpg", description:"인공 빙벽이 장관을 이루는 '실사판 겨울왕국'", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=9bcb03e9-03fe-4ddf-b9d0-920dffc61fea" },
+    { title:"구례 지리산 피아골", image:"images/img_10.jpg", description:"삼홍(三紅)으로 유명한 대한민국 최고의 단풍 계곡", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=44bfd797-1e6a-4b75-99e0-b06e47441e68" }
+  ]},
+  village:{ label:"🌾 쉼이 되는 시골여행", places:[
+    { title:"담양 죽녹원",         image:"images/village_01.jpg", description:"대나무 숲이 뿜어내는 초록빛 천연 에어컨", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1424238b-7957-4660-8cd7-ef5742808ded" },
+    { title:"남해 다랭이마을",      image:"images/village_02.jpg", description:"푸른 바다를 마주한 예술적인 바다 위 초록 계단", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=6bba0262-c894-457a-ae49-124ea96e2db1" },
+    { title:"보성 대한다원 보성녹차밭", image:"images/village_03.jpg", description:"산비탈 따라 펼쳐진 국내 최대 규모의 초록 다원", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=68647205-baba-421d-8f07-b0e077f7f9df" },
+    { title:"담양 메타세쿼이아가로수길", image:"images/village_04.jpg", description:"하늘을 빽빽이 가린 침엽수가 만든 시원한 초록동굴", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=6e6fad62-1c2a-43ec-8cd9-760e662d8fc7" },
+    { title:"영월 동강",           image:"images/village_05.jpg", description:"기암괴석과 울창한 숲이 어우러져 장관을 이루는 명소", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=632164cd-c23f-407b-979b-1b8b5ae31342" },
+    { title:"해남 땅끝마을",        image:"images/village_06.jpg", description:"대한민국 최남단, 새해 일출 명소로 유명", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=11fe0e54-2a1e-400d-9fd6-19ce731d507d" },
+    { title:"순천 낙안읍성",        image:"images/village_07.jpg", description:"조선시대 초가집이 살아 숨 쉬는 500년 민속마을", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=5ddc90b5-645e-4d7f-851d-7d49adc660b1" },
+    { title:"비양도",              image:"images/village_08.jpg", description:"협재 바다 위에 떠 있는 제주 서쪽의 푸른 보석", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=a648c6c0-b213-4b2a-afb8-07191c4e2eb6" },
+    { title:"곡성 섬진강기차마을",   image:"images/village_09.jpg", description:"증기기관차와 레일바이크가 명물인 섬진강 철길", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=e9200c46-98cf-423b-8706-55a1fb6dd7ac" },
+    { title:"구례 산수유마을",       image:"images/village_10.jpg", description:"푸른 숲과 지리산 계곡이 숨겨진 청량한 피서지", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=ebc0dba3-2762-4319-bf76-4249f930f7f6" }
+  ]},
+  leisure:{ label:"🎢 레저·스포츠", places:[
+    { title:"여수 해상케이블카",       image:"images/leisure_01.png", description:"여수 밤바다 야경을 눈에 담는 해상 명소", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1474d159-54e5-4e8c-862f-07d5c6021cdb" },
+    { title:"힐링브릿지 수상레저",     image:"images/leisure_02.jpg", description:"다양한 수상레저와 숙박을 함께 즐기는 곳", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=6a82d108-21ca-4794-9580-1998f84d720b" },
+    { title:"정선 하이원리조트 알파인코스터", image:"images/leisure_03.jpg", description:"고원 원시림을 시속 40km로 뚫는 짜릿한 질주", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=0c089cd3-628f-4d58-850a-1dc885efb5fb" },
+    { title:"산청 경호강 래프팅",      image:"images/leisure_04.jpg", description:"넓은 강폭과 빠른 유속의 스피드 래프팅 명소", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=4c6ca3c9-b366-47b6-a49b-e80df4811dde" },
+    { title:"단양 패러글라이딩",       image:"images/leisure_05.png", description:"남한강 절경을 한눈에 담으며 하늘을 수놓는 비행체험", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=8909c08a-553d-449e-b70a-c38a82e0c8c2" },
+    { title:"양양 서피비치",          image:"images/leisure_06.jpg", description:"하조대해수욕장 북쪽에 조성한 1㎞의 서핑 전용 해변", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=05f647eb-db7f-4308-9b3c-2989254f8aba" },
+    { title:"인제 내린천 래프팅",      image:"images/leisure_07.jpg", description:"국내 3대 래프팅, 물살로 더위 날리는 명소", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=907d6ee3-ab9e-485e-b7e8-93c50fc89dd7" },
+    { title:"용인 에버랜드 스피드웨이", image:"images/leisure_08.jpg", description:"국내 최초 서킷에서 속도감 즐기는 명소", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=af95e347-0115-4005-be9b-0e461ca72f9d" },
+    { title:"부산 스카이라인루지",     image:"images/leisure_09.jpg", description:"기장 다도해의 탁 트인 바다 전망을 즐기는 곳", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3c7b7443-45d3-45f6-8d1e-cbd897e8ea4a" },
+    { title:"제주 김녕 요트투어",      image:"images/leisure_10.jpg", description:"에메랄드빛 제주 바다를 만끽하는 요트 투어", url:"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=7c3b9abe-986a-4a3f-b12a-4c34ed1dc4db" }
+  ] }
+};
+
+const tabs=document.getElementById('tabs');
+const grid=document.getElementById('grid');
+const title=document.getElementById('sectionTitle');
+const count=document.getElementById('count');
+const empty=document.getElementById('empty');
+
+function renderTabs(active){
+  tabs.innerHTML='';
+  Object.entries(categories).forEach(([key,cat])=>{
+    const b=document.createElement('button');
+    b.className='tab'+(key===active?' active':'');
+    b.setAttribute('aria-pressed', key===active ? 'true' : 'false');
+    const spaceIdx = cat.label.indexOf(' ');
+    const icon = spaceIdx > -1 ? cat.label.slice(0, spaceIdx) : '';
+    const text = spaceIdx > -1 ? cat.label.slice(spaceIdx + 1) : cat.label;
+    const lastSpace = text.lastIndexOf(' ');
+    const labelHtml = lastSpace > -1
+      ? `<span class="tab-modifier">${text.slice(0, lastSpace)}</span> <span class="tab-noun">${text.slice(lastSpace + 1)}</span>`
+      : `<span class="tab-noun">${text}</span>`;
+    b.innerHTML = `<span class="tab-icon" aria-hidden="true">${icon}</span><span class="tab-label">${labelHtml}</span>`;
+    b.onclick=()=>{ history.replaceState(null,'',`?category=${key}`); render(key); };
+    tabs.appendChild(b);
+  });
+}
+
+function cardHtml(p){
+  const hasUrl = !!p.url;
+  const linkAttrs = hasUrl
+    ? `href="${p.url}" target="_blank" rel="noopener noreferrer"`
+    : `href="javascript:void(0)" aria-disabled="true" tabindex="-1"`;
+  return `
+    <article class="card">
+      <div class="photo" data-fallback>
+        <img src="${p.image}" alt="${p.title}" loading="lazy"
+             onerror="this.classList.add('img-hidden'); this.parentElement.classList.add('no-image');">
+        <div class="fallback">${p.title}</div>
+      </div>
+      <div class="info">
+        <h3 class="title">${p.title}</h3>
+        <p class="desc">${p.description || ''}</p>
+        <a class="detail-link" ${linkAttrs} aria-label="${p.title} 상세 페이지 보기">
+          <span class="detail-text">자세히 보기</span>
+          <span class="detail-circle" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </article>`;
+}
+
+function render(key){
+  const cat = categories[key] || categories.valley;
+  renderTabs(key);
+  title.textContent = cat.label.replace(/^\S+\s/, '');
+  count.textContent = `${cat.places.length}곳`;
+  grid.innerHTML = cat.places.map(cardHtml).join('');
+  empty.style.display = cat.places.length ? 'none' : 'block';
+}
+
+const initial = new URLSearchParams(location.search).get('category') || 'valley';
+render(initial);
+
+(function heroScaleToFit(){
+  const outer = document.getElementById('heroScaleOuter');
+  const stage = document.getElementById('heroStage');
+  if (!outer || !stage) return;
+
+  let rafId = null;
+
+  function apply(){
+    if (getComputedStyle(outer).display === 'none') return;
+    stage.style.transform = 'none';
+    const naturalWidth = stage.offsetWidth;
+    const naturalHeight = stage.offsetHeight;
+    const availableWidth = outer.clientWidth;
+    const scale = Math.min(1, availableWidth / naturalWidth);
+    stage.style.transformOrigin = 'top center';
+    stage.style.transform = `scale(${scale})`;
+    outer.style.height = (naturalHeight * scale) + 'px';
+  }
+
+  function scheduleApply(){
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(apply);
+  }
+
+  scheduleApply();
+  window.addEventListener('resize', scheduleApply);
+  window.addEventListener('load', scheduleApply);
+  if (document.fonts && document.fonts.ready){
+    document.fonts.ready.then(scheduleApply);
+  }
+})();
+</script>
+</body>
+</html>
