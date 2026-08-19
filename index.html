@@ -53,6 +53,41 @@ img{max-width:100%}
 }
 
 /* =========================================================
+   돌아가기 버튼 — 새창 진입용, 히어로 위 in-flow 바
+   ========================================================= */
+.back-bar{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:14px 30px 0;
+}
+.back-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  height:36px;
+  padding:0 16px 0 12px;
+  border:1px solid #E5E5E5;
+  border-radius:var(--radius-pill);
+  background:var(--c-white);
+  color:var(--c-ink);
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 2px 8px rgba(17,17,17,.04);
+}
+.back-btn svg{ display:block; }
+@media (hover:hover){
+  .back-btn:hover{ background:#FAFAFA; }
+}
+@media (max-width:720px){
+  .back-bar{ padding:12px 16px 0; }
+  .back-btn{
+    height:40px;
+    font-size:13.5px;
+  }
+}
+
+/* =========================================================
    HERO — 좌 / 중앙 / 우 3분할
    ========================================================= */
 .hero-scale-outer{
@@ -1001,6 +1036,15 @@ img{max-width:100%}
 </head>
 <body>
 
+<div class="back-bar">
+  <button type="button" class="back-btn" id="backBtn" aria-label="이전 화면으로 돌아가기">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    돌아가기
+  </button>
+</div>
+
 <div class="hero-scale-outer" id="heroScaleOuter">
 <header class="hero" id="heroStage">
   <div class="hero-grid">
@@ -1187,6 +1231,12 @@ function render(key){
 
 const initial = new URLSearchParams(location.search).get('category') || 'valley';
 render(initial);
+
+document.getElementById('backBtn').addEventListener('click', () => {
+  if (window.opener){ window.close(); return; }
+  if (history.length > 1){ history.back(); return; }
+  window.close();
+});
 
 (function heroScaleToFit(){
   const outer = document.getElementById('heroScaleOuter');
